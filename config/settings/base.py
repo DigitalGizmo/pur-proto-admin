@@ -38,7 +38,7 @@ SECRET_KEY = get_env_variable('PUR_DJANGO_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://142.93.1.173/', '127.0.0.1']
+ALLOWED_HOSTS = ['142.93.1.173', '127.0.0.1']
 
 
 # Application definition
