@@ -1,0 +1,15 @@
+# extensions
+*.pyc
+*.log
+*.jpg
+*.png
+*.gif
+*.geojson
+
+# files
+.DS_Store
+secrets.json
+robots.txt
+.htaccess
+
+# directories
