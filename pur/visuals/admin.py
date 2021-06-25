@@ -9,5 +9,7 @@ class ImageAdmin(admin.ModelAdmin):
             'location', 'persons', ]}),
     ]
     filter_horizontal = ['persons']
+    list_display = ('title', 'slug', 'image_img', 'orig_filename', 'location',
+        )
 
 admin.site.register(Image, ImageAdmin)

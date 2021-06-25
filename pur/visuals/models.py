@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.html import format_html
 from pur.people.models import Person
 from pur.locations.models import Location
 
@@ -38,3 +39,9 @@ class Image(CommonVisuals):
     )
 
     format = models.CharField(max_length=5, choices=FORMAT_CHOICES)
+
+    def image_img(self):
+        return format_html('<img src="/static/visuals/images/thumbs/' + self.slug + \
+                    '.jpg" width="75" height="100"/>')    
+    image_img.short_description = 'Thumb'
+

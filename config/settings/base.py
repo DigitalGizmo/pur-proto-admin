@@ -17,6 +17,7 @@ from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# in this case from pur-proto-admin/config/settings/base.py yields pur-proto-admin
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
@@ -134,6 +135,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'pur' / 'local_static'
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

@@ -1,0 +1,1 @@
+To make local_static stick in git.
