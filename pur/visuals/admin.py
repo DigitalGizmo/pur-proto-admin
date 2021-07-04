@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Image
+from .models import Image, Topic, Source
 
 class ImageAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -13,3 +13,9 @@ class ImageAdmin(admin.ModelAdmin):
         )
 
 admin.site.register(Image, ImageAdmin)
+
+
+admin.site.register(Topic)
+
+
+admin.site.register(Source)

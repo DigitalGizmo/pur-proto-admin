@@ -45,3 +45,21 @@ class Image(CommonVisuals):
                     '.jpg" width="75" height="100"/>')    
     image_img.short_description = 'Thumb'
 
+
+class Topic(models.Model):
+    slug = models.SlugField('short name', max_length=48, unique=True)
+    title = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.slug
+
+
+class Source(models.Model):
+    slug = models.SlugField('short name', max_length=48, unique=True)
+    title = models.CharField(max_length=64)
+    contact_name = models.CharField(max_length=64, null=True, blank=True)
+    contact_email = models.CharField(max_length=64, null=True, blank=True)
+
+
+    def __str__(self):
+        return self.slug
