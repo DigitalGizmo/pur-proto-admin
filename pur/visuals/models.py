@@ -46,7 +46,6 @@ class CommonVisuals(models.Model):
     creation_year = models.IntegerField(null=True, blank=True)
     circa = models.BooleanField(default=False)
     decade = models.BooleanField(default=False)
-    source = models.CharField(max_length=128, null=True, blank=True)
     alt_text = models.CharField(max_length=128, null=True, blank=True)
     status_num = models.IntegerField(default=0, choices=STATUS_NUMS)
     priority = models.IntegerField(default=0, choices=PRIORITY)
