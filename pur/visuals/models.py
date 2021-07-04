@@ -3,18 +3,55 @@ from django.utils.html import format_html
 from pur.people.models import Person
 from pur.locations.models import Location
 
+class Source(models.Model):
+    slug = models.SlugField('short name', max_length=48, unique=True)
+    title = models.CharField(max_length=64)
+    contact_name = models.CharField(max_length=64, null=True, blank=True)
+    contact_email = models.CharField(max_length=64, null=True, blank=True)
+
+
+    def __str__(self):
+        return self.slug
+
+class Topic(models.Model):
+    slug = models.SlugField('short name', max_length=48, unique=True)
+    title = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.slug
+
+
 class CommonVisuals(models.Model):
-    location = models.ForeignKey(Location, on_delete=models.CASCADE,
+    STATUS_NUMS = (
+        (0,'0 - Initial Entry'),
+        (1,'1 - In Admin Only'),
+        (2,'2 - Development (Wireframe)'),
+        (3,'3 - Candidate for Publication'),
+        (4,'4 - Published'),
+    )
+    PRIORITY = (
+        (0,'0 - Reference'),
+        (1,'1 - Could Use'),
+        (2,'2 - Pretty Good'),
+        (3,'3 - Golden'),
+    )
+    location = models.ForeignKey(Location, 
+        default=1, on_delete=models.PROTECT)
+    source = models.ForeignKey(Source, on_delete=models.SET_NULL,
         null=True, blank=True)
     slug = models.SlugField('short name', max_length=48, unique=True)
     orig_filename = models.CharField(max_length=128, null=True, blank=True)
     title = models.CharField(max_length=128, null=True, blank=True)
-    description = models.CharField(max_length=255, null=True, blank=True)
+    description = models.CharField('caption',max_length=255, null=True, blank=True)
     creation_year = models.IntegerField(null=True, blank=True)
     circa = models.BooleanField(default=False)
+    decade = models.BooleanField(default=False)
     source = models.CharField(max_length=128, null=True, blank=True)
     alt_text = models.CharField(max_length=128, null=True, blank=True)
+    status_num = models.IntegerField(default=0, choices=STATUS_NUMS)
+    priority = models.IntegerField(default=0, choices=PRIORITY)
     persons = models.ManyToManyField(Person, blank=True)
+    topics = models.ManyToManyField(Topic, blank=True)
 
     class Meta:
         abstract = True
@@ -45,21 +82,3 @@ class Image(CommonVisuals):
                     '.jpg" width="75" height="100"/>')    
     image_img.short_description = 'Thumb'
 
-
-class Topic(models.Model):
-    slug = models.SlugField('short name', max_length=48, unique=True)
-    title = models.CharField(max_length=64)
-
-    def __str__(self):
-        return self.slug
-
-
-class Source(models.Model):
-    slug = models.SlugField('short name', max_length=48, unique=True)
-    title = models.CharField(max_length=64)
-    contact_name = models.CharField(max_length=64, null=True, blank=True)
-    contact_email = models.CharField(max_length=64, null=True, blank=True)
-
-
-    def __str__(self):
-        return self.slug
