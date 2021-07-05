@@ -12,8 +12,8 @@ class ImageAdmin(admin.ModelAdmin):
             # , 'classes': ['collapse']
     ]
     filter_horizontal = ['persons', 'topics']
-    list_display = ('title', 'slug', 'image_img', 'orig_filename', 'location',
-        )
+    list_display = ('slug', 'image_img', 'city_', 'district_',
+       'status_num', 'priority' )
 
 admin.site.register(Image, ImageAdmin)
 

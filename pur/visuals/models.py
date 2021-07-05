@@ -52,6 +52,19 @@ class CommonVisuals(models.Model):
     persons = models.ManyToManyField(Person, blank=True)
     topics = models.ManyToManyField(Topic, blank=True)
 
+   # City title
+    @property
+    def city_(self):
+        return self.location.city.title
+
+   # District
+    @property
+    def district_(self):
+        if self.location.district:
+            return self.location.district.title
+        else:
+            return ""
+
     class Meta:
         abstract = True
 
