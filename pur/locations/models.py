@@ -5,7 +5,7 @@ class District(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     after_devel = models.BooleanField('After Development', default=False)
     title = models.CharField(max_length=64)
-    description = models.CharField('Description for internal use',
+    description = models.CharField('Notes for internal use',
         max_length=255, null=True, blank=True)
 
     @property
@@ -19,6 +19,9 @@ class District(models.Model):
         return self.city.title + "-" + \
             self.before_or_after + ": " + \
             self.title
+
+    class Meta:
+        ordering = ['city', 'after_devel', 'title']
 
 
 class Location(models.Model):
@@ -59,6 +62,9 @@ class Location(models.Model):
         
     def __str__(self):
         return self.full_location
+
+    class Meta:
+        ordering = ['level', 'city']
 
 
 

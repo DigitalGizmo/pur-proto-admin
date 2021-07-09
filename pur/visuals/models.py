@@ -24,10 +24,11 @@ class Topic(models.Model):
 class CommonVisuals(models.Model):
     STATUS_NUMS = (
         (0,'0 - Initial Entry'),
-        (1,'1 - In Admin Only'),
-        (2,'2 - Development (Wireframe)'),
-        (3,'3 - Candidate for Publication'),
-        (4,'4 - Published'),
+        (1,'1 - In Progress'),
+        (2,'2 - Ready for Review'),
+        (3,'3 - Reviewed'),
+        (4,'4 - Candidate for Pub'),
+        (5,'5 - Published'),
     )
     PRIORITY = (
         (0,'0 - Reference'),

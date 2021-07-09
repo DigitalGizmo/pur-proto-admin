@@ -15,10 +15,24 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ('slug', 'image_img', 'city_', 'district_',
        'status_num', 'priority' )
 
+
+
+class SourceAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['title', 'slug', 'contact_name', 'contact_email']})
+    ]
+    list_display = ('title', 'slug', 'contact_name')
+
+
+class TopicAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['title', 'slug']})
+    ]
+    list_display = ('title', 'slug')
+
+
 admin.site.register(Image, ImageAdmin)
+admin.site.register(Source, SourceAdmin)
+admin.site.register(Topic, TopicAdmin)
 
 
-admin.site.register(Topic)
-
-
-admin.site.register(Source)
