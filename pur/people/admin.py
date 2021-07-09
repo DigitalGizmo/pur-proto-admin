@@ -1,7 +1,20 @@
 from django.contrib import admin
-
 from .models import Person, Role
 
-admin.site.register(Person)
+class RoleAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['title', 'slug']})
+    ]
+    list_display = ('title', 'slug')
 
-admin.site.register(Role)
+
+class PersonAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': [('first_name', 'last_name'), 
+            ('prefix', 'suffix'), 'role']})
+    ]
+    list_display = ('last_name', 'first_name', 'role')
+
+admin.site.register(Role, RoleAdmin)
+admin.site.register(Person, PersonAdmin)
+
