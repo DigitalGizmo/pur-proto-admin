@@ -42,6 +42,8 @@ class CommonVisuals(models.Model):
         null=True, blank=True)
     slug = models.SlugField('short name', max_length=48, unique=True)
     orig_filename = models.CharField(max_length=128, null=True, blank=True)
+    orig_url = models.URLField('Dropbox URL', max_length=255, null=True, blank=True)
+    thumb_file = models.ImageField(upload_to='visuals/thumbpics', default='placeholder.jpg')
     title = models.CharField(max_length=128, null=True, blank=True)
     description = models.CharField('caption',max_length=255, null=True, blank=True)
     creation_year = models.IntegerField(null=True, blank=True)
@@ -91,7 +93,8 @@ class Image(CommonVisuals):
     format = models.CharField(max_length=5, choices=FORMAT_CHOICES)
 
     def image_img(self):
-        return format_html('<img src="/static/visuals/images/thumbs/' + self.slug + \
-                    '.jpg" width="75" height="100"/>')    
+        # return format_html('<img src="/media/visuals/thumbpics/' + self.slug + \
+        #             '.jpg" width="75" height="100"/>')    
+        return format_html('<img src="' + self.thumb_file.url + '" width="75" height="100"/>')    
     image_img.short_description = 'Thumb'
 

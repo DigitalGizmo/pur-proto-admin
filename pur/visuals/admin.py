@@ -4,8 +4,9 @@ from .models import Image, Topic, Source
 
 class ImageAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,  {'fields': ['orig_filename', 'title', 'slug',   
-            'description', 'alt_text', ('creation_year', 'circa', 'decade'), 
+        (None,  {'fields': ['orig_filename', 'orig_url', 'title', 'slug',   
+            'thumb_file', 'description', 'alt_text', 
+            ('creation_year', 'circa', 'decade'), 
             'source', 'topics',
             'location', 'persons', ]}),
         ('Behind the scenes',   {'fields': ['status_num', 'priority']}), 
