@@ -11,8 +11,9 @@ class RoleAdmin(admin.ModelAdmin):
 class PersonAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': [('first_name', 'last_name'), 
-            ('prefix', 'suffix'), 'role']})
+            ('prefix', 'suffix'), 'role', 'cities']})
     ]
+    filter_horizontal = ['cities']
     list_display = ('last_name', 'first_name', 'role')
 
 admin.site.register(Role, RoleAdmin)

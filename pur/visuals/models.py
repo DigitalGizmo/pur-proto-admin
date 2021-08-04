@@ -36,6 +36,13 @@ class CommonVisuals(models.Model):
         (2,'2 - Pretty Good'),
         (3,'3 - Golden'),
     )
+    AUTHORED_BY = (
+        ('','---'),
+        ('Ann','Ann'),
+        ('Dave','Dave'),
+        ('Stacy','Stacy'),
+        ('DG','DG'),
+    )
     location = models.ForeignKey(Location, 
         default=1, on_delete=models.PROTECT)
     source = models.ForeignKey(Source, on_delete=models.SET_NULL,
@@ -49,9 +56,10 @@ class CommonVisuals(models.Model):
     creation_year = models.IntegerField(null=True, blank=True)
     circa = models.BooleanField(default=False)
     decade = models.BooleanField(default=False)
-    alt_text = models.CharField(max_length=128, null=True, blank=True)
+    alt_text = models.TextField(null=True, blank=True)
     status_num = models.IntegerField(default=0, choices=STATUS_NUMS)
     priority = models.IntegerField(default=0, choices=PRIORITY)
+    authored_by = models.CharField(max_length=16, choices=AUTHORED_BY, default='')
     persons = models.ManyToManyField(Person, blank=True)
     topics = models.ManyToManyField(Topic, blank=True)
 
@@ -95,6 +103,6 @@ class Image(CommonVisuals):
     def image_img(self):
         # return format_html('<img src="/media/visuals/thumbpics/' + self.slug + \
         #             '.jpg" width="75" height="100"/>')    
-        return format_html('<img src="' + self.thumb_file.url + '" width="75" height="100"/>')    
+        return format_html('<img src="' + self.thumb_file.url + '" width="100" />')    
     image_img.short_description = 'Thumb'
 
