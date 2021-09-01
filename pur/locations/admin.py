@@ -7,6 +7,7 @@ class DistrictAdmin(admin.ModelAdmin):
         (None, {'fields': [('city', 'after_devel'), 'title', 'description']})
     ]
     list_display = ('title', 'city', 'after_devel' )
+    list_filter     = ['city']
 
 class LocationAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -14,6 +15,7 @@ class LocationAdmin(admin.ModelAdmin):
             'street'), ('lat', 'lng')]})
     ]
     list_display = ('city', 'level', 'district', 'street')
+    list_filter     = ['city']
 
 admin.site.register(District, DistrictAdmin)
 admin.site.register(Location, LocationAdmin)

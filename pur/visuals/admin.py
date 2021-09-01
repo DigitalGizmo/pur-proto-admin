@@ -12,8 +12,11 @@ class ImageAdmin(admin.ModelAdmin):
             # , 'classes': ['collapse']
     ]
     filter_horizontal = ['persons', 'topics']
-    list_display = ('slug', 'image_img', 'city_', 'district_',
+    # list_display = ('slug', 'image_img', 'city_', 'district_',
+    #    'status_num', 'priority' )
+    list_display = ('slug', 'image_img', 'location',
        'status_num', 'priority' )
+    list_filter     = ['location__city']
 
 
 

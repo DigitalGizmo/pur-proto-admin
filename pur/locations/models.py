@@ -48,6 +48,8 @@ class Location(models.Model):
     # district is an association
 
     @property
+    # These location strings show up in the Image/Location dropdown 
+    # as well ad in the Locations/District list
     def full_location(self):
         location_concatination = self.city.title + " - " + self.get_level_display()
         if self.level==4:
@@ -55,6 +57,8 @@ class Location(models.Model):
                 self.street
         elif self.level==3:
             location_concatination += ": " + self.street
+        elif self.level==2:
+            location_concatination += ": " + self.district.title
         return location_concatination
 
     class Meta:
