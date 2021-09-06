@@ -14,9 +14,9 @@ class ImageAdmin(admin.ModelAdmin):
     filter_horizontal = ['persons', 'topics']
     # list_display = ('slug', 'image_img', 'city_', 'district_',
     #    'status_num', 'priority' )
-    list_display = ('slug', 'image_img', 'location',
+    list_display = ('slug', 'image_img', 'location', 'creation_year',
        'status_num', 'priority' )
-    list_filter     = ['location__city']
+    list_filter     = ['location__city', 'topics', 'status_num']
 
 
 
