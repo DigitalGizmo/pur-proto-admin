@@ -17,6 +17,7 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ('slug', 'image_img', 'location', 'creation_year',
        'status_num', 'priority' )
     list_filter     = ['location__city', 'topics', 'status_num']
+    search_fields = ['orig_filename', 'title', 'slug']
 
 
 
