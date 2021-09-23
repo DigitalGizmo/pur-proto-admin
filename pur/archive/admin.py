@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import ArchiveItem, Topic, Source, MediaType
-#, MediaFormat
+from .models import ArchiveItem, Topic, Source, MediaType, MediaFormat
 
 class ArchiveItemAdmin(admin.ModelAdmin):
     fieldsets = [
@@ -43,17 +42,17 @@ class MediaTypeAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug')
 
 
-# class MediaFormatAdmin(admin.ModelAdmin):
-#     fieldsets = [
-#         (None, {'fields': ['title', 'slug']})
-#     ]
-#     list_display = ('title', 'slug')
+class MediaFormatAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['title', 'slug']})
+    ]
+    list_display = ('title', 'slug')
 
 
 admin.site.register(ArchiveItem, ArchiveItemAdmin)
 admin.site.register(Source, SourceAdmin)
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(MediaType, MediaTypeAdmin)
-# admin.site.register(MediaFormat, MediaFormatAdmin)
+admin.site.register(MediaFormat, MediaFormatAdmin)
 
 
