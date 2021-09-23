@@ -5,7 +5,7 @@ from .models import ArchiveItem, Topic, Source, MediaType, MediaFormat
 class ArchiveItemAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,  {'fields': ['orig_filename', 'orig_url', 'title', 'slug',   
-            'thumb_file', 'description', 'source', 'alt_text', 
+            'thumb_file', 'media_format', 'description', 'source', 'alt_text', 
             ('creation_year', 'circa', 'decade'),          
              'topics','location', 'persons', ]}),
         ('Behind the scenes',   {'fields': [('status_num', 'priority'), 'authored_by']}), 

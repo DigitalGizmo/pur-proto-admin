@@ -73,7 +73,7 @@ class ArchiveItem(models.Model):
     authored_by = models.CharField(max_length=16, choices=AUTHORED_BY, default='')
     persons = models.ManyToManyField(Person, blank=True)
     topics = models.ManyToManyField(Topic, blank=True)
-    # media_format = models.ForeignKey(MediaFormat, default=1, on_delete=models.SET_DEFAULT)
+    media_format = models.ForeignKey(MediaFormat, default=1, on_delete=models.SET_DEFAULT)
 
 
    # City title
