@@ -21,6 +21,16 @@ class Topic(models.Model):
         return self.slug
 
 
+class MediaType(models.Model):
+    slug = models.SlugField(max_length=24, unique=True, default='image')
+    title = models.CharField(max_length=32, default='Image')
+
+class MediaFormat(models.Model):
+    media_type = models.ForeignKey(MediaType, default='image', on_delete=models.SET_DEFAULT)
+    slug = models.SlugField(max_length=24, unique=True, default='photo')
+    title = models.CharField(max_length=64)
+
+
 class ArchiveItem(models.Model):
     STATUS_NUMS = (
         (0,'0 - Initial Entry'),
@@ -63,6 +73,8 @@ class ArchiveItem(models.Model):
     authored_by = models.CharField(max_length=16, choices=AUTHORED_BY, default='')
     persons = models.ManyToManyField(Person, blank=True)
     topics = models.ManyToManyField(Topic, blank=True)
+    media_format = models.ForeignKey(MediaFormat, default='photo', on_delete=models.SET_DEFAULT)
+
 
    # City title
     @property
@@ -88,4 +100,3 @@ class ArchiveItem(models.Model):
 
     class Meta:
         verbose_name = "Archive Item"
-
