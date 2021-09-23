@@ -25,10 +25,10 @@ class MediaType(models.Model):
     slug = models.SlugField(max_length=24, unique=True, default='image')
     title = models.CharField(max_length=32, default='Image')
 
-class MediaFormat(models.Model):
-    media_type = models.ForeignKey(MediaType, default='image', on_delete=models.SET_DEFAULT)
-    slug = models.SlugField(max_length=24, unique=True, default='photo')
-    title = models.CharField(max_length=64)
+# class MediaFormat(models.Model):
+#     media_type = models.ForeignKey(MediaType, default=1, on_delete=models.SET_DEFAULT)
+#     slug = models.SlugField(max_length=24, unique=True, default='photo')
+#     title = models.CharField(max_length=64)
 
 
 class ArchiveItem(models.Model):
@@ -73,7 +73,7 @@ class ArchiveItem(models.Model):
     authored_by = models.CharField(max_length=16, choices=AUTHORED_BY, default='')
     persons = models.ManyToManyField(Person, blank=True)
     topics = models.ManyToManyField(Topic, blank=True)
-    media_format = models.ForeignKey(MediaFormat, default='photo', on_delete=models.SET_DEFAULT)
+    # media_format = models.ForeignKey(MediaFormat, default=1, on_delete=models.SET_DEFAULT)
 
 
    # City title
