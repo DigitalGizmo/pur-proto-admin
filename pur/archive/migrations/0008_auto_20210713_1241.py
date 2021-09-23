@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('visuals', '0007_image_source'),
+        ('archive', '0007_image_source'),
     ]
 
     operations = [
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='image',
             name='thumb_file',
-            field=models.ImageField(default='placeholder.jpg', upload_to='visuals/thumbpics'),
+            field=models.ImageField(default='placeholder.jpg', upload_to='archive/thumbpics'),
         ),
         migrations.AlterField(
             model_name='image',

@@ -7,7 +7,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('people', '0002_auto_20210607_1746'),
-        ('visuals', '0001_initial'),
+        ('archive', '0001_initial'),
     ]
 
     operations = [

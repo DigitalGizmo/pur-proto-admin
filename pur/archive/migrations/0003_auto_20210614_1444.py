@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('locations', '0003_alter_location_options'),
         ('people', '0002_auto_20210607_1746'),
-        ('visuals', '0002_image_persons'),
+        ('archive', '0002_image_persons'),
     ]
 
     operations = [

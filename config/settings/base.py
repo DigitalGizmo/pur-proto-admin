@@ -45,10 +45,11 @@ ALLOWED_HOSTS = ['142.93.1.173', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'pur.visuals.apps.VisualsConfig',
+    'pur.archive.apps.ArchiveConfig',
     'pur.cities.apps.CitiesConfig',
     'pur.locations.apps.LocationsConfig',
     'pur.people.apps.PeopleConfig',
+    'django_rename_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

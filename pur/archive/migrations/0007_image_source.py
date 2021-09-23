@@ -7,13 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('visuals', '0006_remove_image_source'),
+        ('archive', '0006_remove_image_source'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='image',
             name='source',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='visuals.source'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='archive.source'),
         ),
     ]

@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('locations', '0004_location_district'),
-        ('visuals', '0004_source_topic'),
+        ('archive', '0004_source_topic'),
     ]
 
     operations = [
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='image',
             name='topics',
-            field=models.ManyToManyField(blank=True, to='visuals.Topic'),
+            field=models.ManyToManyField(blank=True, to='archive.Topic'),
         ),
         migrations.AlterField(
             model_name='image',
