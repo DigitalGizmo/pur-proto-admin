@@ -21,7 +21,7 @@ class Topic(models.Model):
         return self.slug
 
 
-class CommonVisuals(models.Model):
+class Image(models.Model):
     STATUS_NUMS = (
         (0,'0 - Initial Entry'),
         (1,'1 - In Progress'),
@@ -77,33 +77,15 @@ class CommonVisuals(models.Model):
         else:
             return ""
 
-    class Meta:
-        abstract = True
-
     def __str__(self):
         return self.slug
-
-
-class Image(CommonVisuals):
-    PHOTO = 'photo'
-    GRAPHIC = 'graph'
-    DRAWING = 'draw'
-    MAP = 'map'
-    DOCUMENT = 'doc'
-
-    FORMAT_CHOICES = (
-        (PHOTO, 'photo'),
-        (GRAPHIC, 'graphic/ephemera'),
-        (DRAWING, 'drawing'),
-        (MAP, 'map'),
-        (DOCUMENT, 'document'),
-    )
-
-    format = models.CharField(max_length=5, choices=FORMAT_CHOICES)
 
     def image_img(self):
         # return format_html('<img src="/media/visuals/thumbpics/' + self.slug + \
         #             '.jpg" width="75" height="100"/>')    
         return format_html('<img src="' + self.thumb_file.url + '" width="100" />')    
     image_img.short_description = 'Thumb'
+
+    class Meta:
+        verbose_name = "Archive Item"
 
