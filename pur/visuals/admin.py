@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Image, Topic, Source
+from .models import ArchiveItem, Topic, Source
 
-class ImageAdmin(admin.ModelAdmin):
+class ArchiveItemAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,  {'fields': ['orig_filename', 'orig_url', 'title', 'slug',   
             'thumb_file', 'description', 'source', 'alt_text', 
@@ -35,7 +35,7 @@ class TopicAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug')
 
 
-admin.site.register(Image, ImageAdmin)
+admin.site.register(ArchiveItem, ArchiveItemAdmin)
 admin.site.register(Source, SourceAdmin)
 admin.site.register(Topic, TopicAdmin)
 

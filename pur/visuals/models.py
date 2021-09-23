@@ -21,7 +21,7 @@ class Topic(models.Model):
         return self.slug
 
 
-class Image(models.Model):
+class ArchiveItem(models.Model):
     STATUS_NUMS = (
         (0,'0 - Initial Entry'),
         (1,'1 - In Progress'),
