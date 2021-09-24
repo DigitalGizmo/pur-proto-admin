@@ -4,20 +4,20 @@ from .models import ArchiveItem, Topic, Source, MediaType, MediaFormat
 
 class ArchiveItemAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,  {'fields': ['orig_filename', 'orig_url', 'title', 'slug',   
-            'thumb_file', 'description', 'source', 'alt_text', 
+        (None,  {'fields': ['orig_filename', 'orig_url', 'title', 'media_format', 
+            'slug', 'thumb_file', 'description', 'source', 'alt_text', 
             ('creation_year', 'circa', 'decade'),          
              'topics','location', 'persons', ]}),
         ('Behind the scenes',   {'fields': [('status_num', 'priority'), 'authored_by']}), 
             # , 'classes': ['collapse']
-            # 'media_format',
+            # 
     ]
     filter_horizontal = ['persons', 'topics']
     # list_display = ('slug', 'image_img', 'city_', 'district_',
     #    'status_num', 'priority' )
     list_display = ('slug', 'image_img', 'location', 'creation_year',
        'status_num', 'priority' )
-    list_filter     = ['location__city', 'topics', 'status_num']
+    list_filter     = ['location__city', 'topics', 'media_format', 'status_num']
     search_fields = ['orig_filename', 'title', 'slug']
 
 
@@ -45,7 +45,7 @@ class MediaTypeAdmin(admin.ModelAdmin):
 
 class MediaFormatAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['title', 'slug']})
+        (None, {'fields': ['media_type', 'title', 'slug']})
     ]
     list_display = ('title', 'slug')
 
