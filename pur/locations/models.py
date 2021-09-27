@@ -52,12 +52,12 @@ class Location(models.Model):
     # as well ad in the Locations/District list
     def full_location(self):
         location_concatination = self.city.title + " - " + self.get_level_display()
-        if self.level==4:
+        if self.level==4: # Address
             location_concatination += ": " + self.street_number + " " +\
                 self.street
-        elif self.level==3:
+        elif self.level==3: # Street
             location_concatination += ": " + self.street
-        elif self.level==2:
+        elif self.level==2: # District
             location_concatination += ": " + self.district.title
         return location_concatination
 

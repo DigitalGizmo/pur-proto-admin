@@ -35,7 +35,7 @@ class MediaFormat(models.Model):
     title = models.CharField(max_length=64)
 
     def __str__(self):
-        return self.media_type.slug + ": " + self.slug
+        return self.media_type.slug + ": " + self.title
 
 
 class ArchiveItem(models.Model):
