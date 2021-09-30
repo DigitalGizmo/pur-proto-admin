@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'pur.locations.apps.LocationsConfig',
     'pur.people.apps.PeopleConfig',
     'django_rename_app',
+    'ariadne_django',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
