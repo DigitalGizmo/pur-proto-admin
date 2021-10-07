@@ -49,7 +49,7 @@ class Location(models.Model):
 
     @property
     # These location strings show up in the Image/Location dropdown 
-    # as well ad in the Locations/District list
+    # as well as in the Locations/District list
     def full_location(self):
         location_concatination = self.city.title + " - " + self.get_level_display()
         if self.level==4: # Address

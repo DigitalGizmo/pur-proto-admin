@@ -28,6 +28,9 @@ class MediaType(models.Model):
     def __str__(self):
         return self.slug
 
+    class Meta:
+        ordering = ['slug']
+
 
 class MediaFormat(models.Model):
     media_type = models.ForeignKey(MediaType, default=1, on_delete=models.SET_DEFAULT)

@@ -13,13 +13,18 @@ class ArchiveItemAdmin(admin.ModelAdmin):
             # 
     ]
     filter_horizontal = ['persons', 'topics']
-    # list_display = ('slug', 'image_img', 'city_', 'district_',
-    #    'status_num', 'priority' )
-    list_display = ('slug', 'image_img', 'location', 'creation_year',
+    list_display = ('slug', 'image_img', 'short_media_format', 'short_location', 'creation_year',
        'status_num', 'priority' )
-    list_filter     = ['location__city', 'topics', 'media_format', 'status_num']
+    list_filter     = ['location__city', 'media_format__media_type', 'topics', 'status_num']
     search_fields = ['orig_filename', 'title', 'slug']
 
+    def short_location(self, obj):
+        return obj.location.city.title + ": " + obj.location.get_level_display()
+    short_location.short_description = 'Location'
+
+    def short_media_format(self, obj):
+        return obj.media_format.slug
+    short_media_format.short_description = 'Format'
 
 
 class SourceAdmin(admin.ModelAdmin):
