@@ -91,6 +91,11 @@ class ArchiveItem(models.Model):
     def city_(self):
         return self.location.city.title
 
+   # Source
+    @property
+    def source_title(self):
+        return self.source.title
+
    # District
     @property
     def district_(self):

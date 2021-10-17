@@ -9,7 +9,9 @@ type ArchiveItem {
     id: Int
     slug: String!
     title: String!
-
+    description: String
+    creation_year: Int
+    source_title: String
 }
 """
 
