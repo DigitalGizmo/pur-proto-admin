@@ -61,6 +61,30 @@ class Location(models.Model):
             location_concatination += ": " + self.district.title
         return location_concatination
 
+    @property
+    # Display for Visual Record. "Regular" address format
+    def location_display(self):
+        # print("-- location_display level: " + str(self.level))
+        location_concatination = " "
+        if self.level==4: # Address
+            # print("--- in 4 ")
+            location_concatination += str(self.street_number) + " " + self.street + ", "
+        elif self.level==3: # Street
+            # print("--- in 3 ")
+            location_concatination += self.street + ", "
+        elif self.level==2: # District
+            # print("--- in 2 ")
+            location_concatination += self.district.title + ", "
+        location_concatination += self.city.title
+        # print("-- location_concatination pre area: " + location_concatination)
+        # Not sure why, but this breaks address -- no location shows
+        # if (self.level > 2 and self.district.title):
+        #     print("--- in > 2 ")
+        #     location_concatination += ", " + self.district.title + " area"
+        #     # return location_concatination
+        # print("-- location_concatination post area: " + location_concatination)
+        return location_concatination
+
     class Meta:
         ordering = ['city', 'level']
         

@@ -96,6 +96,11 @@ class ArchiveItem(models.Model):
     def source_title(self):
         return self.source.title
 
+   # Location for FullEntry
+    @property
+    def location_display(self):
+        return self.location.location_display
+
    # District
     @property
     def district_(self):

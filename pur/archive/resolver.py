@@ -12,6 +12,7 @@ type ArchiveItem {
     description: String
     creation_year: Int
     source_title: String
+    location_display: String
 }
 """
 
