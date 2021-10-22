@@ -12,7 +12,9 @@ type ArchiveItem {
     description: String
     creation_year: Int
     source_title: String
-    location_display: String
+    city: String
+    district: String
+    street_address: String
 }
 """
 
@@ -23,7 +25,7 @@ def resolve_archive_images(*_, city_id=None): # city=None
     print("city_id: " + str(city_id))
     if city_id:
         return ArchiveItem.objects.filter(media_format__media_type__slug='image',
-            status_num__gte=2, priority__gte=1, location__city=city_id)
+            status_num__gte=2, priority__gte=1, city=city_id)
     return ArchiveItem.objects.filter(media_format__media_type__slug='image',
             status_num__gte=2, priority__gte=1)
 

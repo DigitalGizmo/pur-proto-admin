@@ -5,23 +5,25 @@ from .models import ArchiveItem, Topic, Source, MediaType, MediaFormat
 class ArchiveItemAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,  {'fields': ['orig_filename', 'orig_url', 'title', 'media_format', 
-            'slug', 'thumb_file', 'description', 'source', 'alt_text', 
-            ('creation_year', 'circa', 'decade'),          
-             'topics','location', 'persons', ]}),
+            'slug', 'thumb_file', 'city', 'street_address', 'district', 'description', 
+            'source', 'alt_text', ('creation_year', 'circa', 'decade'),          
+             'topics', 'persons', ]}),
         ('Behind the scenes',   {'fields': [('status_num', 'priority'), 'authored_by']}), 
             # , 'classes': ['collapse']
             # 
     ]
     filter_horizontal = ['persons', 'topics']
-    list_display = ('slug', 'image_img', 'short_media_format', 'short_location', 'creation_year',
-       'status_num', 'priority' )
-    list_filter     = ['media_format__media_type', 'topics', 'status_num']
+    list_display = ('slug', 'image_img', 'city', 'short_media_format',  
+        'creation_year', 'status_num', 'priority' )
+    # 'short_location',
+    list_filter     = ['city', 'media_format__media_type', 'topics', 'status_num']
     # 'location__city', 
+
     search_fields = ['orig_filename', 'title', 'slug']
 
-    def short_location(self, obj):
-        return obj.location.city.title + ": " + obj.location.get_level_display()
-    short_location.short_description = 'Location'
+    # def short_location(self, obj):
+    #     return obj.location.city.title + ": " + obj.location.get_level_display()
+    # short_location.short_description = 'Location'
 
     def short_media_format(self, obj):
         return obj.media_format.slug
