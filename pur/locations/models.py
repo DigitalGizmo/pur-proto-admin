@@ -86,14 +86,8 @@ class Location(models.Model):
         return location_concatination
 
     class Meta:
-        ordering = ['city', 'level']
+        ordering = ['city', 'district']
+        verbose_name = "District"
         
     def __str__(self):
         return self.full_location
-
-    class Meta:
-        ordering = ['level', 'city']
-
-
-
-

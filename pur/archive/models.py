@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.html import format_html
 from pur.people.models import Person
+from pur.cities.models import City
 from pur.locations.models import Location
 
 class Source(models.Model):
@@ -63,10 +64,13 @@ class ArchiveItem(models.Model):
         ('Stacy','Stacy'),
         ('DG','DG'),
     )
-    location = models.ForeignKey(Location, 
+    city = models.ForeignKey(City, 
         default=1, on_delete=models.PROTECT)
-    source = models.ForeignKey(Source, on_delete=models.SET_NULL,
-        null=True, blank=True)
+    location = models.ForeignKey(Location, 
+        on_delete=models.SET_NULL, null=True, blank=True)
+    street_address = models.CharField(max_length=64, null=True, blank=True)
+    source = models.ForeignKey(Source, 
+        on_delete=models.SET_NULL, null=True, blank=True)
     slug = models.SlugField('short name', max_length=48, unique=True)
     orig_filename = models.CharField(max_length=128, null=True, blank=True)
     orig_url = models.URLField('Dropbox URL', max_length=255, null=True, blank=True)
@@ -89,7 +93,7 @@ class ArchiveItem(models.Model):
    # City title
     @property
     def city_(self):
-        return self.location.city.title
+        return self.city.title
 
    # Source
     @property
