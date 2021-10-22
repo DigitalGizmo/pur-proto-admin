@@ -13,7 +13,7 @@ type ArchiveItem {
     creation_year: Int
     source_title: String
     city: String
-    district: String
+    district_title: String
     street_address: String
 }
 """
