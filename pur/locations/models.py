@@ -87,7 +87,6 @@ class Location(models.Model):
 
     class Meta:
         ordering = ['city', 'district']
-        verbose_name = "District"
         
     def __str__(self):
         return self.full_location

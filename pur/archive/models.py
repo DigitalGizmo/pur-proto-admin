@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.html import format_html
 from pur.people.models import Person
 from pur.cities.models import City
-from pur.locations.models import Location
+from pur.locations.models import District
 
 class Source(models.Model):
     slug = models.SlugField('short name', max_length=48, unique=True)
@@ -66,7 +66,7 @@ class ArchiveItem(models.Model):
     )
     city = models.ForeignKey(City, 
         default=1, on_delete=models.PROTECT)
-    location = models.ForeignKey(Location, 
+    district = models.ForeignKey(District, 
         on_delete=models.SET_NULL, null=True, blank=True)
     street_address = models.CharField(max_length=64, null=True, blank=True)
     source = models.ForeignKey(Source, 

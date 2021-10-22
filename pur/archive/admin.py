@@ -15,7 +15,8 @@ class ArchiveItemAdmin(admin.ModelAdmin):
     filter_horizontal = ['persons', 'topics']
     list_display = ('slug', 'image_img', 'short_media_format', 'short_location', 'creation_year',
        'status_num', 'priority' )
-    list_filter     = ['location__city', 'media_format__media_type', 'topics', 'status_num']
+    list_filter     = ['media_format__media_type', 'topics', 'status_num']
+    # 'location__city', 
     search_fields = ['orig_filename', 'title', 'slug']
 
     def short_location(self, obj):
