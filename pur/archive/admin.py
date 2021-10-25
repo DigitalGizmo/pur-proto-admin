@@ -13,17 +13,22 @@ class ArchiveItemAdmin(admin.ModelAdmin):
             # 
     ]
     filter_horizontal = ['persons', 'topics']
-    list_display = ('slug', 'image_img', 'city', 'short_media_format',  
-        'creation_year', 'status_num', 'priority' )
-    # 'short_location',
+    list_display = ('title', 'image_img', 'city', 
+        'short_media_format', 'creation_year', 'status_num', 'priority' )
+    # 'has_address',
     list_filter     = ['city', 'media_format__media_type', 'topics', 'status_num']
     # 'location__city', 
 
     search_fields = ['orig_filename', 'title', 'slug']
 
-    # def short_location(self, obj):
-    #     return obj.location.city.title + ": " + obj.location.get_level_display()
-    # short_location.short_description = 'Location'
+    # Sidelined - not currently used
+    def has_address(self, obj):
+        if (obj.street_address):
+            return True
+        else:
+            return False
+    has_address.short_description = 'Addr'
+    has_address.boolean = True
 
     def short_media_format(self, obj):
         return obj.media_format.slug

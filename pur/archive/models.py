@@ -76,7 +76,7 @@ class ArchiveItem(models.Model):
     orig_url = models.URLField('Dropbox URL', max_length=255, null=True, blank=True)
     thumb_file = models.ImageField(upload_to='visuals/thumbpics', default='placeholder.jpg')
     title = models.CharField(max_length=128, null=True, blank=True)
-    description = models.CharField('caption',max_length=255, null=True, blank=True)
+    description = models.TextField('caption', null=True, blank=True)
     creation_year = models.IntegerField('Year', 
         help_text='creation year', null=True, blank=True)
     circa = models.BooleanField(default=False)
