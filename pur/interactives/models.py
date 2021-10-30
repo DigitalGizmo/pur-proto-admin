@@ -13,6 +13,8 @@ class Interactive(models.Model):
 
 
 class Hotspot(models.Model):
+    interactive = models.ForeignKey(Interactive,
+        default=1, on_delete=models.PROTECT)
     ordinal = models.IntegerField(default=99)
     title = models.CharField(max_length=64)
     text_percent = models.IntegerField(default=90)
@@ -25,3 +27,5 @@ class Hotspot(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['ordinal']
