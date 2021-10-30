@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'pur.cities.apps.CitiesConfig',
     'pur.locations.apps.LocationsConfig',
     'pur.people.apps.PeopleConfig',
+    'pur.interactives.apps.InteractivesConfig',
     'django_rename_app',
     'ariadne_django',
     'corsheaders',
