@@ -17,7 +17,7 @@ class HotspotAdmin(admin.ModelAdmin):
             ]
         }),
     ]
-    list_display = ('ordinal', 'title', 
+    list_display = ('title', 'ordinal', 
         'text_percent', 'hotspot_x', 'hotspot_y', 'hotspot_r')
     list_filter = ['interactive']
 
