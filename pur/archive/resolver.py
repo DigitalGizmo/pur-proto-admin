@@ -27,6 +27,7 @@ type Hotspot {
     hotspot_x: Int
     hotspot_y: Int
     hotspot_r: Int
+    more: String
 }
 """
 
