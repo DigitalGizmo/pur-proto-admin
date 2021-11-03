@@ -5,7 +5,7 @@ from pur.interactives.models import Hotspot
 type_defs= """
 type Query{
     all_images(city_id: Int): [ArchiveItem]
-    hotspots(interactive_id: Int): [Hotspot]
+    hotspots(interactive_part_id: Int): [Hotspot]
 }
 type ArchiveItem {
     id: Int
@@ -43,10 +43,10 @@ def resolve_archive_images(*_, city_id=None): # city=None
             status_num__gte=2, priority__gte=1)
 
 @query.field('hotspots')
-def resolve_hotspots(*_, interactive_id=None): # city=None
-    print("interactive_id: " + str(interactive_id))
-    if interactive_id:
-        return Hotspot.objects.filter(interactive=interactive_id)
+def resolve_hotspots(*_, interactive_part_id=None): # city=None
+    print("interactive_part_id: " + str(interactive_part_id))
+    if interactive_part_id:
+        return Hotspot.objects.filter(interactive_part=interactive_part_id)
     return Hotspot.objects.all()
 
 schema = make_executable_schema(type_defs, query)

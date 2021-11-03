@@ -23,9 +23,7 @@ class InteractivePart(models.Model):
 
 
 class Hotspot(models.Model):
-    # interactive_part = models.ForeignKey(InteractivePart,
-    #     default=1, on_delete=models.PROTECT)
-    interactive = models.ForeignKey(Interactive,
+    interactive_part = models.ForeignKey(InteractivePart,
         default=1, on_delete=models.PROTECT)
     ordinal = models.IntegerField(default=99)
     title = models.CharField(max_length=64)
