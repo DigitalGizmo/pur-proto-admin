@@ -16,10 +16,9 @@ class InteractivePartsAdmin(admin.ModelAdmin):
     ]
     list_display = ('slug', 'title', 'interactive')
 
-# 'interactive',
 class HotspotAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': [ 'ordinal', 'title', 
+        (None, {'fields': ['interactive_part', 'ordinal', 'title', 
             ('text_percent', 'hotspot_x', 'hotspot_y', 'hotspot_r', 
                 'blurb', 'more')
             ]
@@ -27,7 +26,7 @@ class HotspotAdmin(admin.ModelAdmin):
     ]
     list_display = ('title', 'ordinal', 
         'text_percent', 'hotspot_x', 'hotspot_y', 'hotspot_r')
-    # list_filter = ['interactive']
+    list_filter = ['interactive_part']
 
 admin.site.register(Interactive ,InteractivesAdmin)
 admin.site.register(InteractivePart ,InteractivePartsAdmin)
