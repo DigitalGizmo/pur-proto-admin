@@ -11,8 +11,20 @@ class Interactive(models.Model):
     def __str__(self):
         return self.slug
 
+class InteractivePart(models.Model):
+    interactive = models.ForeignKey(Interactive,
+        default=1, on_delete=models.PROTECT)
+    slug = models.SlugField('short name', max_length=48, unique=True)
+    part_num = models.IntegerField(default=99)
+    title = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.slug
+
 
 class Hotspot(models.Model):
+    # interactive_part = models.ForeignKey(InteractivePart,
+    #     default=1, on_delete=models.PROTECT)
     interactive = models.ForeignKey(Interactive,
         default=1, on_delete=models.PROTECT)
     ordinal = models.IntegerField(default=99)
