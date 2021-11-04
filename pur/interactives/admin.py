@@ -24,9 +24,30 @@ class HotspotAdmin(admin.ModelAdmin):
             ]
         }),
     ]
-    list_display = ('title', 'ordinal', 
-        'text_percent', 'hotspot_x', 'hotspot_y', 'hotspot_r')
+    list_display = ('title', 'interactive_part', 'short_ord', 
+        'short_percent', 'short_x', 'short_y', 'short_r')
     list_filter = ['interactive_part']
+
+    def short_ord(self, obj):
+        return obj.ordinal
+    short_ord.short_description = 'ord'
+
+    def short_percent(self, obj):
+        return obj.text_percent
+    short_percent.short_description = '%'
+
+    def short_x(self, obj):
+        return obj.hotspot_x
+    short_x.short_description = 'x'
+
+    def short_y(self, obj):
+        return obj.hotspot_y
+    short_y.short_description = 'y'
+
+    def short_r(self, obj):
+        return obj.hotspot_r
+    short_r.short_description = 'r'
+
 
 admin.site.register(Interactive ,InteractivesAdmin)
 admin.site.register(InteractivePart ,InteractivePartsAdmin)

@@ -21,6 +21,10 @@ class InteractivePart(models.Model):
     def __str__(self):
         return self.slug
 
+    class Meta:
+        # verbose_name = "Part"
+        ordering = ['interactive', 'slug']
+
 
 class Hotspot(models.Model):
     interactive_part = models.ForeignKey(InteractivePart,
@@ -38,4 +42,4 @@ class Hotspot(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['ordinal']
+        ordering = ['interactive_part', 'ordinal']
