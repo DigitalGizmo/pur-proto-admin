@@ -1,4 +1,4 @@
-from ariadne import QueryType, make_executable_schema
+from ariadne import ObjectType, make_executable_schema
 from .models import Hotspot
 
 type_defs= """
@@ -15,9 +15,14 @@ type Hotspot {
     hotspot_y: Int
     hotspot_r: Int
 }
+type InteractivePart {
+    id: Int
+    slug: String!
+    title: String!    
+}
 """
 
-query = QueryType()
+query = ObjectType("Query")
 
 @query.field('hotspots')
 def resolve_hotspots(*_, interactive_id=None): # city=None
@@ -25,5 +30,9 @@ def resolve_hotspots(*_, interactive_id=None): # city=None
     if interactive_id:
         return Hotspot.objects.filter(interactive=interactive_id)
     return Hotspot.objects.all()
+
+interactive_part = ObjectType("InteractivePart")
+
+# @interactive_part.field
 
 schema = make_executable_schema(type_defs, query)
