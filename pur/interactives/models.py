@@ -31,10 +31,10 @@ class Hotspot(models.Model):
         default=1, on_delete=models.PROTECT)
     ordinal = models.IntegerField(default=99)
     title = models.CharField(max_length=64)
-    text_percent = models.IntegerField(default=90)
+    text_percent = models.IntegerField('text position %', default=90)
     hotspot_x = models.IntegerField(default=900)
     hotspot_y = models.IntegerField(default=90)
-    hotspot_r = models.IntegerField(default=20)
+    hotspot_r = models.IntegerField('hotspot radius',default=20)
     blurb = models.TextField( null=True, blank=True)
     more = models.TextField( null=True, blank=True)
 
@@ -42,4 +42,4 @@ class Hotspot(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['interactive_part', 'ordinal']
+        ordering = ['interactive_part', 'text_percent']

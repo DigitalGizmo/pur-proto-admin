@@ -18,19 +18,19 @@ class InteractivePartsAdmin(admin.ModelAdmin):
 
 class HotspotAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['interactive_part', 'ordinal', 'title', 
+        (None, {'fields': ['interactive_part', 'title', 
             ('text_percent', 'hotspot_x', 'hotspot_y', 'hotspot_r', 
                 'blurb', 'more')
             ]
         }),
     ]
-    list_display = ('title', 'interactive_part', 'short_ord', 
+    list_display = ('title', 'interactive_part', 
         'short_percent', 'short_x', 'short_y', 'short_r')
     list_filter = ['interactive_part']
 
-    def short_ord(self, obj):
-        return obj.ordinal
-    short_ord.short_description = 'ord'
+    # def short_ord(self, obj):
+    #     return obj.ordinal
+    # short_ord.short_description = 'ord'
 
     def short_percent(self, obj):
         return obj.text_percent
