@@ -10,16 +10,24 @@ class Source(models.Model):
     contact_name = models.CharField(max_length=64, null=True, blank=True)
     contact_email = models.CharField(max_length=64, null=True, blank=True)
 
-
     def __str__(self):
-        return self.slug
+        return self.title
+
+    class Meta:
+        # verbose_name = "Part"
+        ordering = ['title']
+
 
 class Topic(models.Model):
     slug = models.SlugField('short name', max_length=48, unique=True)
     title = models.CharField(max_length=64)
 
     def __str__(self):
-        return self.slug
+        return self.title
+
+    class Meta:
+        # verbose_name = "Part"
+        ordering = ['title']
 
 
 class MediaType(models.Model):
