@@ -14,7 +14,7 @@ class PersonAdmin(admin.ModelAdmin):
             ('prefix', 'suffix'), 'role', 'cities']})
     ]
     filter_horizontal = ['cities']
-    list_display = ('last_name', 'first_name', 'role')
+    list_display = ('last_name', 'first_name', 'id', 'role')
 
 admin.site.register(Role, RoleAdmin)
 admin.site.register(Person, PersonAdmin)

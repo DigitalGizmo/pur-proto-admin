@@ -14,7 +14,7 @@ class ArchiveItemAdmin(admin.ModelAdmin):
     ]
     filter_horizontal = ['persons', 'topics']
     list_display = ('title', 'image_img', 'city', 
-        'short_media_format', 'creation_year', 'status_num', 'priority' )
+        'short_media_format', 'creation_year', 'id', 'status_num', 'priority' )
     # 'has_address',
     list_filter     = ['city', 'media_format__media_type', 'topics', 'status_num']
     # 'location__city', 
