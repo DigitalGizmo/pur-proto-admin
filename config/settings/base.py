@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'pur.people.apps.PeopleConfig',
     'pur.interactives.apps.InteractivesConfig',
     'django_rename_app',
+    'strawberry_django',
     'ariadne_django',
     'corsheaders',
     'django.contrib.admin',
