@@ -1,8 +1,7 @@
-from ast import Try
-from pyexpat import model
-from unicodedata import name
 import graphene
 from graphene_django import DjangoObjectType
+# from graphene_django.filter import DjangoFilterConnectionField
+# from graphene import relay, ObjectType
 
 from pur.archive.models import ArchiveItem
 from pur.cities.models import City
@@ -17,12 +16,13 @@ class ArchiveItemType(DjangoObjectType):
         model = ArchiveItem
         fields = ("id", "slug", "title", "city")
 
+
 class Query(graphene.ObjectType):
     all_archiveitems = graphene.List(ArchiveItemType)
     city_by_id = graphene.Field(CityType, 
         id=graphene.Int(required=True))
-    images_by_cityid = graphene.List(ArchiveItemType,
-        cityid=graphene.Int(required=True))
+    images_by_id = graphene.List(ArchiveItemType,
+        id=graphene.Int(required=True))
 
     def resolve_all_archiveitems(root,info):
         return ArchiveItem.objects.select_related("city").all()
@@ -33,13 +33,29 @@ class Query(graphene.ObjectType):
         except City.DoesNotExist:
             return None
 
-    def resolve_imgages_by_cityid(root, info, cityid):
-        try:
-            return ArchiveItem.objects.filter(
-                media_format__media_type__slug='image',
-                status_num__gte=2, priority__gte=1, 
-                city=cityid)
-        except ArchiveItemType.DoesNotExist:
-            return ArchiveItem.objects.all()
+    # def resolve_images_by_id(root, info, id):
+    def resolve_images_by_id(root, info, **kwargs):
+        # try:
+        id = kwargs.get('id')
+        return ArchiveItem.objects.get(id=id)
+            # return ArchiveItem.objects.select_related("city").all()
+        # except ArchiveItem.DoesNotExist:
+        #     return None
+
+# class CityNode(DjangoObjectType):
+#     class Meta:
+#         model = City
+#         filter_fields = ('title', 'archiveItems')
+#         interfaces = (relay.Node, )
+
+    # class ArchiveItemNode(DjangoObjectType):
+    #     class Meta:
+    #         model = ArchiveItem
+    #         filter_fields = {
+    #             'slug' : ['exact', 'icontains'], 
+    #             'title' : ['exact', 'icontains', 'istartswith'],
+    #             'city__id' : ['exact'],
+    #         }
+    #         interfaces = (relay.Node, )
 
 schema = graphene.Schema(query=Query)
