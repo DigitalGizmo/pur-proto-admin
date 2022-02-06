@@ -51,8 +51,8 @@ INSTALLED_APPS = [
     'pur.people.apps.PeopleConfig',
     'pur.interactives.apps.InteractivesConfig',
     'django_rename_app',
-    'strawberry_django',
-    'ariadne_django',
+    'graphene_django',
+    # 'ariadne_django',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -156,3 +156,7 @@ MEDIA_ROOT = BASE_DIR.parent.parent / 'pur-proto' / 'media'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+GRAPHENE = {
+    "SCHEMA": "config.schema.schema"
+}

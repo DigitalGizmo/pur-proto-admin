@@ -1,11 +1,33 @@
-import strawberry
-from typing import List
-from pur.interactives.types import Hotspot
-from pur.archive.types import ArchiveItem
+from pyexpat import model
+from unicodedata import name
+import graphene
+from graphene_django import DjangoObjectType
 
-@strawberry.type
-class Query:
-  hotspots: List[Hotspot] = strawberry.django.field()
-  all_images: List[ArchiveItem] = strawberry.django.field()
+from pur.archive.models import ArchiveItem
+from pur.cities.models import City
 
-schema = strawberry.Schema(query=Query)
+class CityType(DjangoObjectType):
+    class Meta:
+        model = City
+        fields = ("id", "title", "archiveItems")
+
+class ArchiveItemType(DjangoObjectType):
+    class Meta:
+        model = ArchiveItem
+        fields = ("id", "slug", "title", "city")
+
+class Query(graphene.ObjectType):
+    images = graphene.List(ArchiveItemType)
+    city_by_name = graphene.Field(CityType, 
+        title=graphene.String(required=True))
+
+    def resolve_images(root,info):
+        return ArchiveItem.objects.select_related("city").all()
+
+    def resolve_city_by_name(root, info):
+        try:
+            return City.objects.get(title=title)
+        except City.DoesNotExist:
+            return None
+
+schema = graphene.Schema(query=Query)

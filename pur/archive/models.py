@@ -72,7 +72,7 @@ class ArchiveItem(models.Model):
         ('Stacy','Stacy'),
         ('DG','DG'),
     )
-    city = models.ForeignKey(City, 
+    city = models.ForeignKey(City, related_name='archiveItems',
         default=1, on_delete=models.PROTECT)
     district = models.ForeignKey(District, 
         on_delete=models.SET_NULL, null=True, blank=True)
