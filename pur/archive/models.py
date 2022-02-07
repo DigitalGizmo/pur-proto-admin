@@ -72,17 +72,19 @@ class ArchiveItem(models.Model):
         ('Stacy','Stacy'),
         ('DG','DG'),
     )
-    city = models.ForeignKey(City, related_name='archiveitems',
+    city = models.ForeignKey(City, related_name='archiveItems',
         default=1, on_delete=models.PROTECT)
     district = models.ForeignKey(District, 
         on_delete=models.SET_NULL, null=True, blank=True)
     street_address = models.CharField(max_length=64, null=True, blank=True)
-    source = models.ForeignKey(Source, 
+    source = models.ForeignKey(Source, related_name='archiveItems',
         on_delete=models.SET_NULL, null=True, blank=True)
     slug = models.SlugField('short name', max_length=48, unique=True)
     orig_filename = models.CharField(max_length=128, null=True, blank=True)
-    orig_url = models.URLField('Dropbox URL', max_length=255, null=True, blank=True)
-    thumb_file = models.ImageField(upload_to='visuals/thumbpics', default='placeholder.jpg')
+    orig_url = models.URLField('Dropbox URL', max_length=255, null=True, 
+        blank=True)
+    thumb_file = models.ImageField(upload_to='visuals/thumbpics', 
+        default='placeholder.jpg')
     title = models.CharField(max_length=128, null=True, blank=True)
     description = models.TextField('caption', null=True, blank=True)
     creation_year = models.IntegerField('Year', 
@@ -95,7 +97,8 @@ class ArchiveItem(models.Model):
     authored_by = models.CharField(max_length=16, choices=AUTHORED_BY, default='')
     persons = models.ManyToManyField(Person, blank=True)
     topics = models.ManyToManyField(Topic, blank=True)
-    media_format = models.ForeignKey(MediaFormat, default=1, on_delete=models.SET_DEFAULT)
+    media_format = models.ForeignKey(MediaFormat, default=1, 
+        on_delete=models.SET_DEFAULT)
 
 
    # City title
