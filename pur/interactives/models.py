@@ -12,8 +12,9 @@ class Interactive(models.Model):
         return self.slug
 
 class InteractivePart(models.Model):
-    interactive = models.ForeignKey(Interactive,
-        default=1, on_delete=models.PROTECT)
+    interactive = models.ForeignKey(Interactive, 
+        related_name='interactiveParts', default=1, 
+        on_delete=models.PROTECT)
     slug = models.SlugField('short name', max_length=48, unique=True)
     part_num = models.IntegerField(default=99)
     title = models.CharField(max_length=64)
@@ -28,7 +29,7 @@ class InteractivePart(models.Model):
 
 class Hotspot(models.Model):
     interactive_part = models.ForeignKey(InteractivePart,
-        default=1, on_delete=models.PROTECT)
+        related_name='hotspots', default=1, on_delete=models.PROTECT)
     ordinal = models.IntegerField(default=99)
     title = models.CharField(max_length=64)
     text_percent = models.IntegerField('text position %', default=90)
