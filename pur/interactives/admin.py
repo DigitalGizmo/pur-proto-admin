@@ -18,9 +18,9 @@ class InteractivePartsAdmin(admin.ModelAdmin):
 
 class HotspotAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['interactive_part', 'title', 
+        (None, {'fields': ['interactive_part', 'title', 'slug',
             ('text_percent', 'hotspot_x', 'hotspot_y', 'hotspot_r', 
-                'blurb', 'more')
+                'blurb', 'more', 'archive_item')
             ]
         }),
     ]

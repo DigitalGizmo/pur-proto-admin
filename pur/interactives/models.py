@@ -44,6 +44,7 @@ class Hotspot(models.Model):
     hotspot_r = models.IntegerField('hotspot radius',default=20)
     blurb = models.TextField( null=True, blank=True)
     more = models.TextField( null=True, blank=True)
+    zoom_percent = models.IntegerField( default=100)
 
     def __str__(self):
         return self.title
