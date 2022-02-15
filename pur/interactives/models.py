@@ -1,5 +1,6 @@
 from django.db import models
 from pur.cities.models import City
+from pur.archive.models import ArchiveItem
 
 class Interactive(models.Model):
     city = models.ForeignKey(City, 
@@ -30,8 +31,13 @@ class InteractivePart(models.Model):
 class Hotspot(models.Model):
     interactive_part = models.ForeignKey(InteractivePart,
         related_name='hotspots', default=1, on_delete=models.PROTECT)
+    archive_item = models.ForeignKey(ArchiveItem,
+        related_name='hotspots', on_delete=models.SET_NULL,
+        null=True, blank=True)
     ordinal = models.IntegerField(default=99)
     title = models.CharField(max_length=64)
+    slug = models.SlugField('short name', max_length=48,
+        null=True, blank=True)
     text_percent = models.IntegerField('text position %', default=90)
     hotspot_x = models.IntegerField(default=900)
     hotspot_y = models.IntegerField(default=90)
