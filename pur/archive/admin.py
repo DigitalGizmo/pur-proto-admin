@@ -16,7 +16,7 @@ class ArchiveItemAdmin(admin.ModelAdmin):
     list_display = ('title', 'image_img', 'city', 
         'short_media_format', 'creation_year', 'id', 'status_num', 'priority' )
     # 'has_address',
-    list_filter     = ['city', 'media_format__media_type', 'topics', 'status_num']
+    list_filter     = ['city', 'media_format', 'topics', 'status_num']
     # 'location__city', 
 
     search_fields = ['orig_filename', 'title', 'slug']

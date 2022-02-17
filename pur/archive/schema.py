@@ -31,7 +31,9 @@ class Query(graphene.ObjectType):
     city_by_id = graphene.Field(CityType, 
         id=graphene.Int(required=True))
     visual_record = graphene.List(ArchiveItemType,
-        city_id=graphene.Int(required=False))
+        city_id=graphene.Int(required=False),
+        media_format_id=graphene.Int(required=False)
+        )
 
     # def resolve_all_archiveitems(root,info):
     #     return ArchiveItem.objects.select_related("city").all()
@@ -45,7 +47,18 @@ class Query(graphene.ObjectType):
     # def resolve_images_by_id(root, info, id):
     def resolve_visual_record(root, info, **kwargs):
         city_id = kwargs.get('city_id')
+        media_format_id = kwargs.get('media_format_id')
         if city_id:
-            return ArchiveItem.objects.filter(city_id=city_id)
-        return ArchiveItem.objects.all()
- 
+            if media_format_id:
+                return ArchiveItem.objects.filter(
+                status_num__gte=2, priority__gte=1, city_id=city_id,
+                media_format_id=media_format_id)
+            return ArchiveItem.objects.filter(
+                status_num__gte=2, priority__gte=1, city_id=city_id)
+        if media_format_id and not city_id:
+                return ArchiveItem.objects.filter(
+                status_num__gte=2, priority__gte=1,
+                media_format_id=media_format_id)
+        return ArchiveItem.objects.filter(
+            # media_format__media_type__slug='image',
+            status_num__gte=2, priority__gte=1)
