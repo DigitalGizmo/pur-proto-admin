@@ -1,5 +1,6 @@
 import graphene
 from graphene_django import DjangoObjectType
+from django.db.models import Q
 from pur.archive.models import ArchiveItem, Source
 from pur.cities.models import City
 from pur.locations.models import District
@@ -48,17 +49,27 @@ class Query(graphene.ObjectType):
     def resolve_visual_record(root, info, **kwargs):
         city_id = kwargs.get('city_id')
         media_format_id = kwargs.get('media_format_id')
+
+        qquery = Q(status_num__gte=2, priority__gte=1)
+
         if city_id:
-            if media_format_id:
-                return ArchiveItem.objects.filter(
-                status_num__gte=2, priority__gte=1, city_id=city_id,
-                media_format_id=media_format_id)
-            return ArchiveItem.objects.filter(
-                status_num__gte=2, priority__gte=1, city_id=city_id)
-        if media_format_id and not city_id:
-                return ArchiveItem.objects.filter(
-                status_num__gte=2, priority__gte=1,
-                media_format_id=media_format_id)
-        return ArchiveItem.objects.filter(
-            # media_format__media_type__slug='image',
-            status_num__gte=2, priority__gte=1)
+            qquery.add((Q(city_id=city_id)), 'AND')
+        if media_format_id:
+            qquery.add((Q(media_format_id=media_format_id)), 'AND')
+
+        return ArchiveItem.objects.filter(qquery)
+
+        # if city_id:
+        #     if media_format_id:
+        #         return ArchiveItem.objects.filter(
+        #         status_num__gte=2, priority__gte=1, city_id=city_id,
+        #         media_format_id=media_format_id)
+        #     return ArchiveItem.objects.filter(
+        #         status_num__gte=2, priority__gte=1, city_id=city_id)
+        # if media_format_id and not city_id:
+        #         return ArchiveItem.objects.filter(
+        #         status_num__gte=2, priority__gte=1,
+        #         media_format_id=media_format_id)
+        # return ArchiveItem.objects.filter(
+        #     # media_format__media_type__slug='image',
+        #     status_num__gte=2, priority__gte=1)
