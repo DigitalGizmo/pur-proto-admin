@@ -33,7 +33,7 @@ class Query(graphene.ObjectType):
         id=graphene.Int(required=True))
     visual_record = graphene.List(ArchiveItemType,
         city_id=graphene.Int(required=False),
-        media_format_id=graphene.Int(required=False)
+        media_format_ids=graphene.List(graphene.Int, required=False)
         )
 
     # def resolve_all_archiveitems(root,info):
@@ -48,14 +48,21 @@ class Query(graphene.ObjectType):
     # def resolve_images_by_id(root, info, id):
     def resolve_visual_record(root, info, **kwargs):
         city_id = kwargs.get('city_id')
-        media_format_id = kwargs.get('media_format_id')
+        media_format_ids = kwargs.get('media_format_ids')
 
         qquery = Q(status_num__gte=2, priority__gte=1)
 
+        # Narrow the basic query with city id, if given
         if city_id:
             qquery.add((Q(city_id=city_id)), 'AND')
-        if media_format_id:
-            qquery.add((Q(media_format_id=media_format_id)), 'AND')
+
+        # Create a batch of Format ORs
+        if media_format_ids:
+            fquery = Q()
+            for format_id in media_format_ids:
+                fquery.add((Q(media_format_id=format_id)), 'OR')
+            # And them to the existing query
+            qquery.add(fquery, 'AND')
 
         return ArchiveItem.objects.filter(qquery)
 
