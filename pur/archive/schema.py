@@ -1,7 +1,7 @@
 import graphene
 from graphene_django import DjangoObjectType
 from django.db.models import Q
-from pur.archive.models import ArchiveItem, Source
+from pur.archive.models import ArchiveItem, Source, Topic
 from pur.cities.models import City
 from pur.locations.models import District
 
@@ -33,11 +33,9 @@ class Query(graphene.ObjectType):
         id=graphene.Int(required=True))
     visual_record = graphene.List(ArchiveItemType,
         city_id=graphene.Int(required=False),
-        media_format_ids=graphene.List(graphene.Int, required=False)
+        media_format_ids=graphene.List(graphene.Int, required=False),
+        topic_ids=graphene.List(graphene.Int, required=False)
         )
-
-    # def resolve_all_archiveitems(root,info):
-    #     return ArchiveItem.objects.select_related("city").all()
 
     def resolve_city_by_id(root, info, id):
         try:
@@ -49,6 +47,7 @@ class Query(graphene.ObjectType):
     def resolve_visual_record(root, info, **kwargs):
         city_id = kwargs.get('city_id')
         media_format_ids = kwargs.get('media_format_ids')
+        topic_ids = kwargs.get('topic_ids')
 
         qquery = Q(status_num__gte=2, priority__gte=1)
 
@@ -63,20 +62,14 @@ class Query(graphene.ObjectType):
                 fquery.add((Q(media_format_id=format_id)), 'OR')
             # And them to the existing query
             qquery.add(fquery, 'AND')
+        
+        if topic_ids:
+            # Note the double underscore in topics__id
+            # for many to many query.
+            tquery = Q()
+            for a_topic_id in topic_ids:
+                tquery.add((Q(topics__id=a_topic_id)), 'OR')
+            qquery.add(tquery, 'AND')
 
         return ArchiveItem.objects.filter(qquery)
 
-        # if city_id:
-        #     if media_format_id:
-        #         return ArchiveItem.objects.filter(
-        #         status_num__gte=2, priority__gte=1, city_id=city_id,
-        #         media_format_id=media_format_id)
-        #     return ArchiveItem.objects.filter(
-        #         status_num__gte=2, priority__gte=1, city_id=city_id)
-        # if media_format_id and not city_id:
-        #         return ArchiveItem.objects.filter(
-        #         status_num__gte=2, priority__gte=1,
-        #         media_format_id=media_format_id)
-        # return ArchiveItem.objects.filter(
-        #     # media_format__media_type__slug='image',
-        #     status_num__gte=2, priority__gte=1)
