@@ -72,6 +72,13 @@ class ArchiveItem(models.Model):
         ('Stacy','Stacy'),
         ('DG','DG'),
     )
+    ERA = (
+        (0,'Choose Era'),
+        (1,'0 - 1940s'),
+        (2,'1 - 1950s'),
+        (3,'2 - 1960s'),
+        (4,'3 - 1970s'),
+    )
     city = models.ForeignKey(City, related_name='archiveItems',
         default=1, on_delete=models.PROTECT)
     district = models.ForeignKey(District, 
@@ -99,6 +106,7 @@ class ArchiveItem(models.Model):
     topics = models.ManyToManyField(Topic, blank=True)
     media_format = models.ForeignKey(MediaFormat, default=1, 
         on_delete=models.SET_DEFAULT)
+    era = models.IntegerField(default=0, choices=ERA)
 
 
    # City title
