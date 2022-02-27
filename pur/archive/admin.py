@@ -5,13 +5,14 @@ from .models import ArchiveItem, Topic, Source, MediaType, MediaFormat
 class ArchiveItemAdmin(admin.ModelAdmin):
     fieldsets = [
         (None,  {'fields': ['orig_filename', 'orig_url', 'title', 'media_format', 
-            'slug', 'thumb_file', 'city', 'street_address', 'district', 'description', 
-            'source', 'alt_text', ('creation_year', 'circa', 'decade'),          
+            'slug', 'thumb_file', 'city', 'street_address', 'district', 
+            'description', 'source', 'alt_text', 
+            ('creation_year', 'circa', 'decade'),
              'topics', 'persons', ]}),
-        ('Behind the scenes',   {'fields': [('status_num', 'priority'), 'authored_by']}), 
-            # , 'classes': ['collapse']
-            # 
+        ('Behind the scenes',   {'fields': [('status_num', 'priority'), 
+            'authored_by']}), 
     ]
+    # , 'era'
     filter_horizontal = ['persons', 'topics']
     list_display = ('title', 'image_img', 'city', 
         'short_media_format', 'creation_year', 'id', 'status_num', 'priority' )
