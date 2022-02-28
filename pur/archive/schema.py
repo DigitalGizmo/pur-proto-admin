@@ -5,6 +5,14 @@ from pur.archive.models import ArchiveItem, Source, Topic
 from pur.cities.models import City
 from pur.locations.models import District
 
+eras = [
+    [0, 1], # Need the used ones to start at 1
+    [1939, 1950],
+    [1949, 1960],
+    [1959, 1970],
+    [1969, 1980]
+]
+
 class CityType(DjangoObjectType):
     class Meta:
         model = City
@@ -35,6 +43,7 @@ class Query(graphene.ObjectType):
         city_id=graphene.Int(required=False),
         media_format_ids=graphene.List(graphene.Int, required=False),
         topic_ids=graphene.List(graphene.Int, required=False),
+        era_ids=graphene.List(graphene.Int, required=False),
         search_term=graphene.String(required=False)
         )
 
@@ -49,6 +58,7 @@ class Query(graphene.ObjectType):
         city_id = kwargs.get('city_id')
         media_format_ids = kwargs.get('media_format_ids')
         topic_ids = kwargs.get('topic_ids')
+        era_ids = kwargs.get('era_ids')
         search_term = kwargs.get('search_term')
 
         qquery = Q(status_num__gte=2, priority__gte=1)
@@ -72,6 +82,16 @@ class Query(graphene.ObjectType):
             for a_topic_id in topic_ids:
                 tquery.add((Q(topics__id=a_topic_id)), 'OR')
             qquery.add(tquery, 'AND')
+        
+        if era_ids:
+            equery = Q()
+            for era_id in era_ids:
+                subquery = Q()
+                subquery.add(Q(creation_year__gt=eras[era_id][0]), 'AND')
+                subquery.add(Q(creation_year__lt=eras[era_id][1]), 'AND')
+                equery.add(subquery, 'OR')
+
+            qquery.add(equery, 'AND')
         
         if search_term:
             squery = Q()
