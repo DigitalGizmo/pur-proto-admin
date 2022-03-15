@@ -9,7 +9,8 @@ class ArchiveItemAdmin(admin.ModelAdmin):
             ('city', 'street_address'), 'district', 
             'description', 'source', 'alt_text', 
             ('creation_year', 'circa', 'decade'),
-             'topics', 'persons', 'used_in']}),
+             'topics', 'persons', 
+             ('used_in', 'used_in_title')]}),
         ('Behind the scenes',   {'fields': [('status_num', 'priority'), 
             'authored_by']}), 
     ]
