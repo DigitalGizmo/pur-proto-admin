@@ -72,20 +72,13 @@ class ArchiveItem(models.Model):
         ('Stacy','Stacy'),
         ('DG','DG'),
     )
-    ERA = (
-        (0,'Choose Era'),
-        (1,'0 - 1940s'),
-        (2,'1 - 1950s'),
-        (3,'2 - 1960s'),
-        (4,'3 - 1970s'),
-    )
     city = models.ForeignKey(City, related_name='archiveItems',
         default=1, on_delete=models.PROTECT)
     district = models.ForeignKey(District, 
         on_delete=models.SET_NULL, null=True, blank=True)
     street_address = models.CharField(max_length=64, null=True, blank=True)
     source = models.ForeignKey(Source, related_name='archiveItems',
-        on_delete=models.SET_NULL, null=True, blank=True)
+        default=1, on_delete=models.PROTECT)
     slug = models.SlugField('short name', max_length=48, unique=True)
     orig_filename = models.CharField(max_length=128, null=True, blank=True)
     orig_url = models.URLField('Dropbox URL', max_length=255, null=True, 
@@ -95,7 +88,7 @@ class ArchiveItem(models.Model):
     title = models.CharField(max_length=128, null=True, blank=True)
     description = models.TextField('caption', null=True, blank=True)
     creation_year = models.IntegerField('Year', 
-        help_text='creation year', null=True, blank=True)
+        help_text='creation year', default=1900)
     circa = models.BooleanField(default=False)
     decade = models.BooleanField(default=False)
     alt_text = models.TextField(null=True, blank=True)
@@ -106,7 +99,9 @@ class ArchiveItem(models.Model):
     topics = models.ManyToManyField(Topic, blank=True)
     media_format = models.ForeignKey(MediaFormat, default=1, 
         on_delete=models.SET_DEFAULT)
-    era = models.IntegerField(default=0, choices=ERA)
+    used_in = models.CharField(max_length=64, null=True, blank=True)
+
+
 
 
    # City title

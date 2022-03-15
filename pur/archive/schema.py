@@ -7,10 +7,12 @@ from pur.locations.models import District
 
 eras = [
     [0, 1], # Need the used ones to start at 1
+    [1899, 1940],
     [1939, 1950],
     [1949, 1960],
     [1959, 1970],
-    [1969, 1980]
+    [1969, 1980],
+    [1979, 2050]
 ]
 
 class CityType(DjangoObjectType):
