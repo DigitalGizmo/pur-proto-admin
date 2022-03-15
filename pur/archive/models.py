@@ -99,38 +99,38 @@ class ArchiveItem(models.Model):
     topics = models.ManyToManyField(Topic, blank=True)
     media_format = models.ForeignKey(MediaFormat, default=1, 
         on_delete=models.SET_DEFAULT)
-    used_in = models.CharField(max_length=64, null=True, blank=True)
-
-
-
+    used_in = models.CharField(max_length=64, null=True, blank=True,
+        help_text='e.g.: people/haines-dauner')
+    used_in_title = models.CharField(max_length=128, null=True, blank=True,
+        help_text='e.g.: Bob Haines and Gene Dauner, Photographers')
 
    # City title
-    @property
-    def city_(self):
-        return self.city.title
+    # @property
+    # def city_(self):
+    #     return self.city.title
 
-   # Source
-    @property
-    def source_title(self):
-        return self.source.title
+#    # Source
+#     @property
+#     def source_title(self):
+#         return self.source.title
 
-   # District
-    @property
-    def district_title(self):
-        return self.district.title
+#    # District
+#     @property
+#     def district_title(self):
+#         return self.district.title
 
-   # Location for FullEntry
-    @property
-    def location_display(self):
-        return self.location.location_display
+#    # Location for FullEntry
+#     @property
+#     def location_display(self):
+#         return self.location.location_display
 
-   # District
-    @property
-    def district_(self):
-        if self.location.district:
-            return self.location.district.title
-        else:
-            return ""
+#    # District
+#     @property
+#     def district_(self):
+#         if self.location.district:
+#             return self.location.district.title
+#         else:
+#             return ""
 
     def __str__(self):
         return self.slug

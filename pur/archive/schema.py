@@ -35,7 +35,7 @@ class ArchiveItemType(DjangoObjectType):
         model = ArchiveItem
         fields = ("id", "slug", "title", "city", 
             "description", "creation_year", "source", 
-            "street_address", "district", )
+            "street_address", "district", "used_in")
 
 class Query(graphene.ObjectType):
     # all_archiveitems = graphene.List(ArchiveItemType)
