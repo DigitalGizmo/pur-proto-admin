@@ -30,7 +30,7 @@ class TimelineEntry(models.Model):
     )
     year = models.IntegerField(default=1900)
     # title = models.CharField(max_length=64, null=True, blank=True)
-    blurb = models.CharField(max_length=194)
+    blurb = models.TextField()
     has_cell_image = models.BooleanField(default=False)
     cell_image_ref = models.CharField(max_length=128, null=True, blank=True)
     more_text = models.TextField(null=True, blank=True)
