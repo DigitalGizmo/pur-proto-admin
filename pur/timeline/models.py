@@ -1,14 +1,25 @@
 from django.db import models
 
-# class TimelineLayer(models.Model):
-#     title = models.CharField(max_length=32)
-#     class_name = models.CharField(max_length=32)
-#     ordinal = models.IntegerField(default=9)
+class TimelineLayer(models.Model):
+    slug = models.SlugField('short name', max_length=48, unique=True)
+    ordinal = models.IntegerField(default=9)
+    title = models.CharField(max_length=32)
 
-#     def __str__(self):
-#         return self.title    
+    def __str__(self):
+        return self.title
+    class Meta:
+      ordering = ['ordinal']
 
-# # class Thruline
+class Thruline(models.Model):
+    slug = models.SlugField('short name', max_length=48, unique=True)
+    ordinal = models.IntegerField(default=9)
+    title = models.CharField(max_length=32)
+
+    def __str__(self):
+        return self.title
+    class Meta:
+      ordering = ['ordinal']
+
 
 # class TimelineEntry(models.Model):
 #     timeline_layer = models.ForeignKey(
