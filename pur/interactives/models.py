@@ -31,6 +31,7 @@ class InteractivePart(models.Model):
 class Hotspot(models.Model):
     interactive_part = models.ForeignKey(InteractivePart,
         related_name='hotspots', default=1, on_delete=models.PROTECT)
+    # Presence of an archive item triggers image in more pop.
     archive_item = models.ForeignKey(ArchiveItem,
         related_name='hotspots', on_delete=models.SET_NULL,
         null=True, blank=True)

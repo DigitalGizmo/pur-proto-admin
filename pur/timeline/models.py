@@ -21,17 +21,21 @@ class Thruline(models.Model):
       ordering = ['ordinal']
 
 
-# class TimelineEntry(models.Model):
-#     timeline_layer = models.ForeignKey(
-#         TimelineLayer,
-#         related_name='years',
-#         default=1,
-#         on_delete=models.PROTECT
-#     )
-#     year = models.IntegerField(default=1900)
-#     title = models.CharField(max_length=64)
-#     blurb = models.CharField(max_length=194)
-#     hasImage = models.BooleanField(default=False)
-#     pop_text = models.TextField(null=True, blank=True)
-#     # thrulines = 
+class TimelineEntry(models.Model):
+    timeline_layer = models.ForeignKey(
+        TimelineLayer,
+        related_name='timelineEntries',
+        default=0,
+        on_delete=models.PROTECT
+    )
+    year = models.IntegerField(default=1900)
+    # title = models.CharField(max_length=64, null=True, blank=True)
+    blurb = models.CharField(max_length=194)
+    has_cell_image = models.BooleanField(default=False)
+    cell_image_ref = models.CharField(max_length=128, null=True, blank=True)
+    more_text = models.TextField(null=True, blank=True)
+    # has_more_image = models.BooleanField(default=False)
+    # more_image_ref = models.CharField(max_length=128, null=True, blank=True)
+    thrulines = models.ManyToManyField(Thruline, blank=True)
+
   
