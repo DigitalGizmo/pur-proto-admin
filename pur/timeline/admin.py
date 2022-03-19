@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import TimelineLayer, Thruline, TimelineEntry
-from django.forms import TextInput #, Textarea
+from django.forms import Textarea, TextInput
 from django.db import models
 
 class TimelineLayerAdmin(admin.ModelAdmin):
@@ -25,12 +25,12 @@ class TimelineEntryAdmin(admin.ModelAdmin):
     ]
     list_display = ('year', 'timeline_layer', 'blurb')
     filter_horizontal = ['thrulines',]
+    list_filter = ['timeline_layer']
 
-    # formfield_overrides = {
-    #     models.CharField: {'widget': 
-    #         TextInput(attrs={'rows': '4'})},
-    #     # models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':40})},
-    # }
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'80'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':50})},
+    }
 
 admin.site.register(TimelineLayer, TimelineLayerAdmin)
 admin.site.register(Thruline, ThrulineAdmin)

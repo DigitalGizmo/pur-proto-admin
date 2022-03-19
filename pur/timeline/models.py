@@ -38,4 +38,5 @@ class TimelineEntry(models.Model):
     # more_image_ref = models.CharField(max_length=128, null=True, blank=True)
     thrulines = models.ManyToManyField(Thruline, blank=True)
 
-  
+    class Meta:
+      ordering = ['timeline_layer', 'year']
