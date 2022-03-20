@@ -22,6 +22,11 @@ class Thruline(models.Model):
 
 
 class TimelineEntry(models.Model):
+    PRIORITY = (
+        (1,'1 - Maybe Not'),
+        (2,'2 - Probably'),
+        (3,'3 - For sure'),
+    )    
     timeline_layer = models.ForeignKey(
         TimelineLayer,
         related_name='timelineEntries',
@@ -34,9 +39,14 @@ class TimelineEntry(models.Model):
     has_cell_image = models.BooleanField(default=False)
     cell_image_ref = models.CharField(max_length=128, null=True, blank=True)
     more_text = models.TextField(null=True, blank=True)
+    priority = models.IntegerField(default=0, choices=PRIORITY)
+    has_more = models.BooleanField(default=False)
     # has_more_image = models.BooleanField(default=False)
     # more_image_ref = models.CharField(max_length=128, null=True, blank=True)
     thrulines = models.ManyToManyField(Thruline, blank=True)
-
+    used_in = models.CharField(max_length=64, null=True, blank=True,
+        help_text='e.g.: people/haines-dauner')
+    used_in_title = models.CharField(max_length=128, null=True, blank=True,
+        help_text='e.g.: Bob Haines and Gene Dauner, Photographers')
     class Meta:
       ordering = ['timeline_layer', 'year']

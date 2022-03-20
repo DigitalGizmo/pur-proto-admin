@@ -23,9 +23,4 @@ class TimelineEntryNode(DjangoObjectType):
         interfaces = (relay.Node, )
 
 class Query(ObjectType):
-    # interactive = relay.Node.Field(InteractiveNode)
-    # all_interactives = DjangoFilterConnectionField(InteractiveNode)
-
-    # interactive_part = relay.Node.Field(InteractivePartNode)
-    # all_interactive_parts = DjangoFilterConnectionField(InteractivePartNode)
     timeline_layers = DjangoFilterConnectionField(TimelineLayerNode)
