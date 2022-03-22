@@ -20,7 +20,8 @@ class TimelineEntryAdmin(admin.ModelAdmin):
     (None, {'fields': [
         'timeline_layer', 'year', 'blurb',
         ('has_cell_image', 'priority'), # 'cell_image_ref',
-        'thrulines', 'more_text'
+        'thrulines', 'more_text',
+        ('used_in', 'used_in_title')
         ]})
     ]
     list_display = ('year', 'timeline_layer', 'priority', 'blurb')
