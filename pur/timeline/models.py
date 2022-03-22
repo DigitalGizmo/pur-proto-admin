@@ -44,9 +44,10 @@ class TimelineEntry(models.Model):
     # has_more_image = models.BooleanField(default=False)
     # more_image_ref = models.CharField(max_length=128, null=True, blank=True)
     thrulines = models.ManyToManyField(Thruline, blank=True)
-    used_in = models.CharField(max_length=64, null=True, blank=True,
-        help_text='e.g.: people/haines-dauner')
-    used_in_title = models.CharField(max_length=128, null=True, blank=True,
+    used_in = models.CharField('Link to', max_length=128, 
+        null=True, blank=True, help_text='e.g.: people/haines-dauner')
+    used_in_title = models.CharField('Link title', max_length=128, 
+        null=True,  blank=True,
         help_text='e.g.: Bob Haines and Gene Dauner, Photographers')
     class Meta:
       ordering = ['timeline_layer', 'year']
