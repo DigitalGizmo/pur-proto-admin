@@ -13,17 +13,17 @@ class ThrulineAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': [('slug', 'ordinal'), 'title' ]})
     ]
-list_display = ('title', 'ordinal', 'slug')
+    list_display = ('title', 'slug', 'ordinal')
 
 class TimelineEntryAdmin(admin.ModelAdmin):
     fieldsets = [
     (None, {'fields': [
         'timeline_layer', 'year', 'blurb',
-        'has_cell_image', 'cell_image_ref',
+        ('has_cell_image', 'priority'), # 'cell_image_ref',
         'thrulines', 'more_text'
         ]})
     ]
-    list_display = ('year', 'timeline_layer', 'blurb')
+    list_display = ('year', 'timeline_layer', 'priority', 'blurb')
     filter_horizontal = ['thrulines',]
     list_filter = ['timeline_layer']
 

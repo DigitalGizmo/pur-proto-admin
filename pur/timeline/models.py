@@ -23,8 +23,8 @@ class Thruline(models.Model):
 
 class TimelineEntry(models.Model):
     PRIORITY = (
-        (1,'1 - Maybe Not'),
-        (2,'2 - Probably'),
+        (1,'1 - Probably Not'),
+        (2,'2 - Maybe'),
         (3,'3 - For sure'),
     )    
     timeline_layer = models.ForeignKey(
@@ -39,7 +39,7 @@ class TimelineEntry(models.Model):
     has_cell_image = models.BooleanField(default=False)
     cell_image_ref = models.CharField(max_length=128, null=True, blank=True)
     more_text = models.TextField(null=True, blank=True)
-    priority = models.IntegerField(default=0, choices=PRIORITY)
+    priority = models.IntegerField(default=3, choices=PRIORITY)
     has_more = models.BooleanField(default=False)
     # has_more_image = models.BooleanField(default=False)
     # more_image_ref = models.CharField(max_length=128, null=True, blank=True)
