@@ -19,10 +19,11 @@ class TimelineEntryAdmin(admin.ModelAdmin):
     fieldsets = [
     (None, {'fields': [
         'timeline_layer', 'year', 'blurb',
-        ('has_cell_image', 'priority'), # 'cell_image_ref',
-        'thrulines', 'more_text',
+        ('has_cell_image', 'priority'), 'thrulines', 
+        ('more_text', 'has_more'),
         ('used_in', 'used_in_title')
         ]})
+        # 'cell_image_ref',
     ]
     list_display = ('year', 'timeline_layer', 'priority', 'blurb')
     filter_horizontal = ['thrulines',]
